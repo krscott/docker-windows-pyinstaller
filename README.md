@@ -1,9 +1,11 @@
 # docker-windows-pyinstaller
 Boilerplate for building a PyInstaller exe in a Windows Docker container.
 
-## Setup
+## Quick Start
 Add project files to `src/`.
 
-From a bash environment, run `build.sh`. If you don't have bash, just open it and execute the docker commands manually.
+Change `Dockerfile` to use your preferred version of python.
 
-PyInstaller exe will be copied to `dist/`.
+From a bash environment, run `build.sh`. Or, just execute the docker commands manually.
+
+PyInstaller exe will be copied to `dist/` in the host's project directory.
