@@ -2,6 +2,7 @@ import argparse
 import os
 import pyodbc
 import sys
+import webbrowser
 
 
 def eprint(*args, **kwargs):
@@ -53,7 +54,16 @@ if __name__ == '__main__':
         args = parser.parse_args()
 
         if args.file:
-            cnxn = connect_access_file(args.file)
+            try:
+                cnxn = connect_access_file(args.file)
+            except pyodbc.InterfaceError:
+                eprint("Possible missing driver. Please install AccessDatabaseEngine.exe")
+                webbrowser.open(
+                    "https://www.microsoft.com/en-us/download/details.aspx?id=13255",
+                    new=2
+                )
+                raise
+
             crsr = cnxn.cursor()
             for table_info in crsr.tables(tableType='TABLE'):
                 print(table_info.table_name)
